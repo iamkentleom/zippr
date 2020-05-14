@@ -10,7 +10,7 @@ const bundle = options => {
     })
 
     output.on('close', () => {
-        console.log(green(`✔ ${ options.output + '.' + options.extension }, with ${ archive.pointer() } bytes in total.`))
+        console.log(green(`✔ ${ options.output + '.' + options.extension } created with ${ archive.pointer() } bytes in total.`))
     })
     output.on('end', () => {
         console.log('Data has been drained')
@@ -30,7 +30,7 @@ const bundle = options => {
 
     archive.pipe(output)
 
-    options.include.forEach(el => archive.glob(el, { ignore: options.output + '.' + options.extension }))
+    options.include.forEach(el => archive.glob(el, { ignore: [options.output + '.' + options.extension, '.zippr'], dot: true }))
 
     archive.finalize()
 }
