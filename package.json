@@ -1,0 +1,17 @@
+{
+  "name": "zippr",
+  "version": "1.0.0",
+  "description": "Releases archiver tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "./index.js",
+  "author": "Kent Leo L. Makibulan",
+  "license": "MIT",
+  "dependencies": {
+    "archiver": "^4.0.1",
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0"
+  }
+}
