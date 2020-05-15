@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 const { program } = require('commander')
-const { green } = require('chalk')
-const { normalize } = require('path')
 
 const { checkFile } = require('./commands/check')
 const { init } = require('./commands/init')
@@ -18,11 +16,12 @@ program
 
 program
     .command('init')
-    .description('Initialize a zippr process')
+    .description('Initialize a zippr release')
     .alias('i')
-    .action(() => {
-        init()
-        console.log(green(`Initialized zippr process in ${ normalize(process.cwd() + '/.zippr') }`))
+    .option('-f, --force', 'overwrite existing zippr.yaml')
+    .action((act) => {
+        const options = checkFile()
+        if(!options || act.force) init()
     })
 
 program
@@ -30,7 +29,8 @@ program
     .description('Display all zippr process')
     .alias('s')
     .action(() => {
-        checkFile('.zippr', showStatus)
+        const options = checkFile()
+        if(options) showStatus(options)
     })
 
 program
@@ -38,7 +38,8 @@ program
     .description('Make a release from the .zippr file')
     .alias('r')
     .action(() => {
-        checkFile('.zippr', makeRelease)
+        const options = checkFile()
+        if(options) makeRelease(options)
     })
 
 program.parse(process.argv)
