@@ -30,7 +30,7 @@ const bundle = options => {
 
     archive.pipe(output)
 
-    options.include.forEach(el => archive.glob(el, { ignore: [options.output + '.' + options.extension, '.zippr'], dot: true }))
+    options.include.forEach(el => archive.glob(el, { ignore: [options.output + '.' + options.extension, 'zippr.yaml'], dot: true }))
 
     archive.finalize()
 }
