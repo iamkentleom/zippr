@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { program } = require('commander')
+const { red } = require('chalk')
 
 const { checkFile } = require('./commands/check')
 const { init } = require('./commands/init')
@@ -26,11 +27,12 @@ program
 
 program
     .command('status')
-    .description('display all zippr process')
+    .description('summary of all the zipper processes and their contents')
     .alias('s')
     .action(() => {
         const options = checkFile()
         if(options) showStatus(options)
+        else console.log(red('No zippr process found.'))
     })
 
 program
@@ -40,6 +42,7 @@ program
     .action(() => {
         const options = checkFile()
         if(options) makeRelease(options)
+        else console.log(red('No zippr process found.'))
     })
 
 program.parse(process.argv)
