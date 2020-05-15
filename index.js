@@ -12,11 +12,11 @@ const { version } = require('./package.json')
 program
     .name('zippr')
     .version(version)
-    .description('Releases archiver tool')
+    .description('releases archiving automation tool')
 
 program
     .command('init')
-    .description('Initialize a zippr release')
+    .description('initialize a zippr process')
     .alias('i')
     .option('-f, --force', 'overwrite existing zippr.yaml')
     .action((act) => {
@@ -26,7 +26,7 @@ program
 
 program
     .command('status')
-    .description('Display all zippr process')
+    .description('display all zippr process')
     .alias('s')
     .action(() => {
         const options = checkFile()
@@ -35,7 +35,7 @@ program
 
 program
     .command('release')
-    .description('Make a release from the .zippr file')
+    .description('make a release from the zippr process')
     .alias('r')
     .action(() => {
         const options = checkFile()
