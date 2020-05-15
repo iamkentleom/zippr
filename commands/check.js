@@ -1,12 +1,14 @@
 const { readFileSync } = require('fs')
-const { red } = require('chalk')
+const { normalize } = require('path')
+const { safeLoadAll } = require('js-yaml')
 
-const checkFile = (file, next) => {
+const checkFile = () => {
     try {
-        const options = JSON.parse(readFileSync(file, 'utf8'))
-        next(options)
+        const file = normalize(process.cwd() + '/zippr.yaml')
+        const options = safeLoadAll(readFileSync(file, 'utf8'))
+        return options
     } catch(err) {
-        console.log(red('No zippr process available (.zippr file not found)'))
+        return false
     }
 }
 
