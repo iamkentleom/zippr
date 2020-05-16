@@ -1,3 +1,4 @@
+[![asciicast](https://asciinema.org/a/330735.svg)](https://asciinema.org/a/330735)
 # zippr
 
 > releases archiving automation tool
