@@ -3,7 +3,7 @@ const { green, red, yellow } = require('chalk')
 const { createWriteStream } = require('fs')
 const { getFiles } = require('./check')
 
-const bundle = options => {
+const bundle = (options) => {
     const filename = `${ options.output }.${ options.extension }`
     const output = createWriteStream(filename)
     const archive = archiver(options.extension, {
@@ -37,7 +37,7 @@ const bundle = options => {
     archive.finalize()
 }
 
-const makeRelease = options => {
+const makeRelease = (options) => {
     options.forEach(release => bundle(release))
 }
 
