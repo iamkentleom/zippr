@@ -6,8 +6,8 @@ const { red } = require('chalk')
 
 const getFiles = (options) => {
     try{
-        const output = `${ options.output }.${ options.extension }`
-        const toBeIgnored = [output, 'zippr.yaml'].concat(options.exclude.filter(x => x !== ""))
+        const zips = checkFile().map(x => `${ x.output }.${ x.extension }`).concat(['zippr.yaml'])
+        const toBeIgnored = options.exclude ? zips.concat(options.exclude.filter(x => x != '')) : zips
         const paths = sync(['**'], { ignore: toBeIgnored, dot: true })
         return paths.sort()
     } catch(err) {
