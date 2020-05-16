@@ -1,20 +1,15 @@
 const { readFileSync } = require('fs')
 const { normalize } = require('path')
 const { safeLoadAll } = require('js-yaml')
-const { GlobSync } = require('glob')
+const { sync } = require('globby')
 const { red } = require('chalk')
 
-const getFiles = (options, deep) => {
+const getFiles = (options) => {
     try{
         const output = `${ options.output }.${ options.extension }`
-        const ignoreThis = [output, 'zippr.yaml'].concat(options.exclude)
-        const files = new GlobSync('**', {
-            dot: true,
-            ignore: ignoreThis,
-            mark: true,
-            noglobstar: !deep
-        })
-        return files.found
+        const toBeIgnored = [output, 'zippr.yaml'].concat(options.exclude.filter(x => x !== ""))
+        const paths = sync(['**'], { ignore: toBeIgnored, dot: true })
+        return paths.sort()
     } catch(err) {
         console.log(red(`No files found.`))
     }

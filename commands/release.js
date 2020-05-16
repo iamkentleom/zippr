@@ -31,7 +31,7 @@ const bundle = (options) => {
 
     archive.pipe(output)
 
-    const files = getFiles(options, true)
+    const files = getFiles(options)
     files.forEach(file => archive.file(file))
 
     archive.finalize()
