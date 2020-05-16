@@ -29,9 +29,10 @@ program
     .command('status')
     .description('summary of all the zipper processes and their contents')
     .alias('s')
-    .action(() => {
+    .option('-t, --tree', 'show files as a tree')
+    .action((act) => {
         const options = checkFile()
-        if(options) showStatus(options)
+        if(options) showStatus(options, act.tree)
         else console.log(red('No zippr process found.'))
     })
 

@@ -5,9 +5,8 @@ const { writeFile } = require('fs')
 const content = `---
 output: release # output filename
 extension: zip # zip or tar
-include: # files to be included
-    # uses glob pattern as defined in https://github.com/isaacs/node-glob#glob-primer
-    - "**"`
+exclude: # files to be excluded
+    - ""`
 
 const init = () => {
     writeFile('zippr.yaml', content, err => {

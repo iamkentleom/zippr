@@ -1,16 +1,17 @@
 const archiver = require('archiver')
 const { green, red, yellow } = require('chalk')
 const { createWriteStream } = require('fs')
+const { getFiles } = require('./check')
 
 const bundle = options => {
-    const filename = options.output
-    const output = createWriteStream(`${ filename }.${ options.extension }`)
+    const filename = `${ options.output }.${ options.extension }`
+    const output = createWriteStream(filename)
     const archive = archiver(options.extension, {
         zlib: { level: 9 }
     })
 
     output.on('close', () => {
-        console.log(green(`✔ ${ options.output + '.' + options.extension } created with ${ archive.pointer() } bytes in total.`))
+        console.log(green(`✔ ${ filename } created with ${ archive.pointer() } bytes in total.`))
     })
     output.on('end', () => {
         console.log('Data has been drained')
@@ -30,7 +31,8 @@ const bundle = options => {
 
     archive.pipe(output)
 
-    options.include.forEach(el => archive.glob(el, { ignore: [options.output + '.' + options.extension, 'zippr.yaml'], dot: true }))
+    const files = getFiles(options, true)
+    files.forEach(file => archive.file(file))
 
     archive.finalize()
 }

@@ -1,24 +1,30 @@
-const { cyan, red } = require('chalk')
-const { GlobSync } = require('glob')
+const { cyan } = require('chalk')
+const { getFiles } = require('./check')
 
-const showFiles = (pattern, output) => {
-    try{
-        const files = new GlobSync(pattern, { ignore: [output, 'zippr.yaml'], dot: true, mark: true })
-        files.found.forEach(file => console.log(`       > ${ file }`))
-    } catch(err) {
-        console.log(red(`No files found.`))
-    }
+const fileTree = (files) => {
+    const indention = '      '
+    files.forEach(file => {
+        if(!file.includes('/')) console.log(`${ indention }- ${ file }`)
+        else {
+            const el = file.split('/')
+            const len = el.length - 1
+            if(el[len] === '') console.log(`${ indention.repeat(len) }- ${ el[len-1] }/`)
+            else console.log(`${ indention.repeat(len + 1) }- ${ el[len] }`)
+        }
+    })
 }
 
-const display = (options) => {
+const display = (options, tree) => {
     const outputName = `${ options.output }.${ options.extension }`
     console.log(cyan('\n' + `   ${ outputName }`))
-    options.include.forEach(el => showFiles(el, outputName))
+    const files = getFiles(options, tree)
+    if(!tree) files.forEach(file => console.log(`      - ${ file }`))
+    else fileTree(files)
 }
 
-const showStatus = options => {
+const showStatus = (options, tree) => {
     console.log('\nArchive file(s) and their contents')
-    options.forEach(process => display(process))
+    options.forEach(process => display(process, tree))
     console.log()
 }
 
