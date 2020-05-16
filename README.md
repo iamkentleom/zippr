@@ -26,16 +26,16 @@ Options:
 
 Commands:
   init|i [options]  initialize a zippr process
-  status|s          summary of all the zipper processes and their contents
+  status|s          summary of all the zippr processes and their contents
   release|r         make a release from the zippr process
   help [command]    display help for command
 ```
 
 To initialized a zippr config, run:
 ```bash
-zipper init
+zippr init
 ```
-this will generate a `zipper.yaml` file in the current directory. [See zippr.yaml](#zippr.yaml) to learn more about the contents of the file.
+this will generate a `zippr.yaml` file in the current directory. [See zippr.yaml](#zippr.yaml) to learn more about the contents of the file.
 
 To see detailed status about the archiving process, run:
 ```bash

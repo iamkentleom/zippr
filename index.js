@@ -27,7 +27,7 @@ program
 
 program
     .command('status')
-    .description('summary of all the zipper processes and their contents')
+    .description('summary of all the zippr processes and their contents')
     .alias('s')
     .action(() => {
         const options = checkFile()
