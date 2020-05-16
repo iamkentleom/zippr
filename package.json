@@ -7,6 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamkentleom/zippr"
+  },
+  "keywords": ["archive", "cli", "tar", "zip"],
   "author": "Kent Leo L. Makibulan",
   "license": "MIT",
   "dependencies": {
